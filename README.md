@@ -1,5 +1,7 @@
 # Feed Ranking API
 
+> 📖 **How the ranking works, what it rewards and what it punishes:** read the [Algorithm Scholium](SCHOLIUM.md).
+> 
 Send one user and a list of posts. Get the posts back ranked, with a score breakdown.
 
 - `algo.py` is the original algorithm and is never modified.
@@ -87,6 +89,8 @@ Only `user.userId` (optional) and `posts` (required, 1 to 2000) are needed. Ever
 
 ## Output
 
+For what each score component means, see [Section 2 of the Scholium](SCHOLIUM.md#2-the-signals).
+
 ```json
 {
   "userId": "u1",
@@ -172,3 +176,12 @@ uvicorn server:app --port 8000
 - The first start takes a few seconds while the model loads and warms up. `/health` reports `ready`.
 - To update the algorithm, edit `algo.py` and commit. The next deploy picks it up.
 - Put the service behind your host's HTTPS (Render, Railway and Fly provide it automatically).
+
+
+## Further reading
+
+| Document | What it covers |
+|---|---|
+| [SCHOLIUM.md](SCHOLIUM.md) | The algorithm explained: signals, findings, what it encourages and discourages |
+| [SCHOLIUM.md#4-findings-where-behavior-departs-from-intent](SCHOLIUM.md#4-findings-where-behavior-departs-from-intent) | Known quirks in the current code |
+| [SCHOLIUM.md#6-encouraged-behavior-and-content](SCHOLIUM.md#6-encouraged-behavior-and-content) | Behaviors the ranking rewards |
